@@ -1,46 +1,27 @@
-# Experiments (for reproducing results)
-
+# SWAY in Permutation Decision Space
+Code for the paper *Preliminary Evaluation of SWAY in Permutation Decision Space via a Novel Euclidean Embedding*.
 > Junghyun Lee, Dongmin Lee, Chani Jung, and Yoo Hwa Park
 > 
 > 
 ---
-## Instructions on running experiments
+<!-- ## Instructions on running experiments
 This has been tested successfully on the following test suites:
-- printtokens
-- printtokens2
-- schedule
-- schedule2
-- space
-- tcas
-- totinfo
+- flex
+- grep
+- gzip
+- sed -->
+## Replication
 
-### Part 1: Setting up the datasets (do for all datasets)
-1. Unpack ../Datasets/DATASET.tar.gz and ../testplans.alt/testplans-bigcov.tar.gz, for **ALL** datasets.
-2. Run `parse_suite.py`
-3. Move the main program files (.c, .h) from ../source.alt/source.orig to ../scripts
-4. Run the following command in ../scripts:
+### Comparison of random, greedy, and SWAY
+To reproduce results in Fig.2, run the following command:
 ```console
-gcc -ftest-coverage -fprofile-arcs -Wall PROGRAM.c -o PROGRAM
+sh total_plot_linux.sh
 ```
-For printtokens and printtokens2, PROGRAM should be *print_tokens* and *print_tokens2*, respectively!
-5. Copy mts.jar from ../Datasets into ../scripts
-6. Run the following command in ../scripts:
-```console
-java -jar mts.jar -en ./PROGRAM -gc PROGRAM.c -sf ../testplans.alt/testplans-bigcov/SUITE -sn testme.sh -tg sir.mts.generators.BourneShellScriptGenerator
-```
-**Remember** which test suite(SUITE) you've used to reproduce our results accurately.
-7. Run the following command in ../scripts:
-```console
-sh testme.sh
-```
-If directory error occurs, it is most likely that mts.jar parsed the testme.sh wrongly.
-Use any text editor to manually edit the testme.sh, for now.
-(For schedule and schedule2, one needs to replace all occurences of input with ../input)
 
-### Part 2: Running SWAY
-7. Run the following command in ../Experiments:
+### Sensitivity of SWAY to initial sample size
+To reproduce results in Fig.3, run the following command:
 ```console
-sh total_plot.sh
+sh total_plot_linux_init.sh
 ```
 
 ---
