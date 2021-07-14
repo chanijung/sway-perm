@@ -67,12 +67,15 @@ def fault_matrix_linux(dataset, suite, num_faults_dict):
 
 def get_apfd(matrix, test_dict, dataset, suite, perm, isLinux=False):
     """
-    :param matrix:
-    :param test_dict:
-    :param dataset:
-    :param suite:
-    :param perm:
-    :return:
+    Args:
+        matrix: Fault matrix
+        test_dict: Dict of test case name: serial number
+        dataset: Name of System Under Test (SUT)
+        suite: Test suite ID number
+        isLinux: Is linux utility or not
+
+    Returns:
+        apfd
     """
     num_cases = matrix.shape[0]
     num_faults = matrix.shape[1]

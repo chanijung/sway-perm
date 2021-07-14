@@ -10,6 +10,15 @@ import pandas as pd
 
 
 def tcp_greedy_linux(dataset, suite, ver):
+    """
+    Args:
+        dataset: Name of System Under Test (SUT)
+        suite: Test suite ID number
+        ver: SUT version number
+
+    Returns:
+        TCP greedy solution of test suite size
+    """
     path = 'Datasets/linuxutils/coverage_singlefault/' + dataset + '/s' + str(suite) + '/v' + ver + ".pkl"
     df = pd.read_pickle(path)
     mat = np.transpose(df.to_numpy())
@@ -33,6 +42,13 @@ def tcp_greedy_linux(dataset, suite, ver):
 
 # Find TCP solution with greedy algorithm until full coverage is accomplished.
 def greedy_until_full_cov(mat):
+    """
+    Args:
+        mat: Coverage matrix of test cases
+
+    Returns:
+        TCP greedy solution until full coverage is accomplished
+    """
     sol = []
     num_tests = mat.shape[0]
     num_valid_stats = mat.shape[1]

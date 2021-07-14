@@ -47,7 +47,18 @@ def farthest_from(pop, pivot):  # pop = numpy matrix of candidates
     return result
 
 
-def where(pop):  # pop = numpy matrix of candidates
+# SPLIT function for continuous space (use FASTMAP)
+def where(pop):
+    """
+    Args:
+        pop: Candidate solutions
+
+    Returns:
+        west representative
+        east representative
+        west items
+        east items
+    """
     ## Random pivot
     rand = pop[np.random.randint(0, len(pop))]
     east = farthest_from(pop, rand)
@@ -81,6 +92,17 @@ def permute_row(seed, i):
 
 
 def tcp_sway(dataset, suite, ver, initial, stop):
+    """
+    Args:
+        dataset: Name of System Under Test (SUT)
+        suite: Test suite ID number
+        ver: SUT version number
+        initial: Initial population size
+        stop: Stopping population size
+
+    Returns:
+        TCP sway solution
+    """
     num_tests_dict = {'flex': {1: 21, 2: 525}, 'grep': {1: 193, 2: 152, 3: 140}, 'gzip': {1: 211},
                       'sed': {1: 36, 2: 360}}
 
@@ -98,4 +120,4 @@ def tcp_sway(dataset, suite, ver, initial, stop):
     pool.close()
     candidates = np.concatenate((np.reshape(seed, (1, length)), np.array(new_rows)))
 
-    return sway(candidates, where, comparing, stop, None), candidates
+    return sway(candidates, where, comparing, stop), candidates

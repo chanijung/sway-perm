@@ -9,8 +9,18 @@ from copy import deepcopy
 
 
 
-def sway(pop, splitor, better, stop, emb_dict):
-    def cluster(items, emb_dict):
+def sway(pop, splitor, better, stop):
+    """
+    Args:
+        pop: Candidate solutions
+        splitor: SPLIT function
+        better: BETTER function
+        stop: Stopping population
+
+    Returns:
+        SWAY solutions
+    """
+    def cluster(items):
         N = len(items)
 
         # Termination condition
@@ -29,8 +39,8 @@ def sway(pop, splitor, better, stop, emb_dict):
             random_mask = np.array([1] * K + [0] * (N - K), dtype=bool)
             np.random.shuffle(random_mask)
             selected = items[random_mask]
-        return cluster(selected, emb_dict)
+        return cluster(selected)
 
-    res = cluster(pop, emb_dict)
+    res = cluster(pop)
 
     return res

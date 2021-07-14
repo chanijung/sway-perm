@@ -9,6 +9,16 @@ import pandas as pd
 
 # Assume that perm is a list of integers
 def get_apsc_linux(dataset, suite, ver, perm):
+    """
+    Args:
+        dataset: Name of System Under Test (SUT)
+        suite: Test suite ID number
+        ver: SUT version number
+        perm: Permutation of test cases
+
+    Returns:
+        apsc
+    """
     ts_values = []
     tc_order = 1
     uncovered_lines = []
