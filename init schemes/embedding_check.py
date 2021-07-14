@@ -71,13 +71,11 @@ def calculate_S_sq(pi, pi0):
 
 n = 20
 
-# pi0 = np.array(range(n))    # Initial permutation
+
 pi0 = np.random.permutation(n)  # Randomly initialized permutation
 pif = (n - 1) - pi0  # Final permutation
-# print("pi0: ", pi0)
-# print("pif: ", pif)
 
-#
+
 mp = {}
 for i in range(n):
     mp[pi0[i]] = i
@@ -97,7 +95,6 @@ swaps = []
 
 loop = True
 while loop:
-    # print("arr0: ", arr0)
     loop = False
     for i in range(n - 1):
         if arr0[i] > arr0[i + 1]:
@@ -105,7 +102,7 @@ while loop:
             swaps.append([i, i + 1])
             arr0[[i, i + 1]] = arr0[[i + 1, i]]
 
-# print(swaps)
+
 l = len(swaps)
 indices = list(range(l + 1))  # Indices of the shortest path
 
@@ -116,17 +113,13 @@ sanity_check = np.zeros(l + 1)
 
 cnt = 1
 pi = copy.deepcopy(pi0)
-# print("pi0: ", pi0)
 for swap in swaps:
     pi[swap] = pi[swap[::-1]]
-
     Spearman_rho_sq[cnt] = calculate_S_sq(pi, pi0)
     Kendall_tau[cnt] = calculate_K(pi, pi0)
     Daniels_Guilbaud[cnt] = calculate_DG(pi, pi0)
     sanity_check[cnt] = n * Kendall_tau[cnt] - Daniels_Guilbaud[cnt]
-
     cnt += 1
-# print(" pi:", pi)
 
 plt.plot(indices, Spearman_rho_sq, 'r', indices, n * Kendall_tau, 'b', indices, Daniels_Guilbaud, 'g'
          , indices, sanity_check, 'm')

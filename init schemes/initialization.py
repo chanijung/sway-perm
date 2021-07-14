@@ -50,14 +50,11 @@ def num_perms_at_dist(n):
                 except Warning as e:
                     sk[i, j] = 1e10
     return sk.astype(np.uint64)
-    # return sk
 
 
 def v2ranking(v, n):  ##len(v)==n, last item must be 0
-    # n = len(v)
     rem = list(range(n))
     rank = np.array([np.nan] * n)  # np.zeros(n,dtype=np.int)
-    # print(v,rem,rank)
     for i in range(len(v)):
         rank[i] = rem[v[i]]
         rem.pop(v[i])
@@ -113,7 +110,7 @@ def init_2(n):
 
     with multiprocessing.Pool() as pool:
         all_permutations = pool.map(functools.partial(perms_at_dist, n, sk), range(int(1 + n*(n-1)/2)))
-    # print(all_permutations[-1])
+
     return [perm for sublist in all_permutations for perm in sublist]
 
 
@@ -131,15 +128,13 @@ def kendallTau(A, B=None):
             b = B[x] - B[y]  # if discordant (different signs)
         except:
             print("ERROR kendallTau, check b", A, B, x, y)
-        # print(b,a,b,A, B, x, y,a * b < 0)
+
         if a * b < 0:
             distance += 1
     return distance
 
 
 if __name__ == "__main__":
-    # a = init_2(20)
-    # print(a[-1])
 
     n = 200
 
@@ -156,7 +151,6 @@ if __name__ == "__main__":
         return kendallTau(pivot, perm)
 
     with multiprocessing.Pool() as pool:
-        # kendall_distances_1 = pool.map(kendallTau, init_1(n, 10000))
         kendall_distances_1 = pool.map(auxiliary, perms)
     plt.hist(kendall_distances_1, bins=100)
     plt.show()

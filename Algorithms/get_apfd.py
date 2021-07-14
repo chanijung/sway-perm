@@ -1,6 +1,6 @@
 """
 Created on 2020/12/12
-@author: nicklee
+@author: nicklee, chanijung
 """
 
 import numpy as np

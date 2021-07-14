@@ -1,6 +1,6 @@
 """
 Created on 2020/12/12
-@author: Dongmin1215, chanijung, yhpark, nicklee
+@author: chanijung, Dongmin1215, yhpark, nicklee
 """
 import numpy as np
 import pandas as pd

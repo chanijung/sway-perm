@@ -24,7 +24,6 @@ def rank_vector(pi):
     result = np.zeros(n)
 
     for i in range(n):
-        # result[i] = pi.index(i + 1)
         result[i] = np.where(pi == i + 1)[0][0]
     return result
 
@@ -49,63 +48,35 @@ def farthest_from(pop, pivot):  # pop = numpy matrix of candidates
 
 
 def where(pop):  # pop = numpy matrix of candidates
-    # print(pop.shape)
-    # time.sleep(5)
-
     ## Random pivot
     rand = pop[np.random.randint(0, len(pop))]
-    # rand = pop[0]
-
-    ## east (farthest from pivot)
     east = farthest_from(pop, rand)
-    # ds = [dist(i, rand) for i in pop]
-    # east = pop[ds.index(max(ds))]
-
-    ## west (farthest from east)
     west = farthest_from(pop, east)
-    # ds = [dist(i, east) for i in pop]
-    # west = pop[ds.index(max(ds))]
 
     ## cosine rule
     c = dist(east, west)
     cc = 2 * c ** 0.5
-    # print(east)
-    # print(west)
-    # print(pop)
-    # time.sleep(5)
-    # if cc == 0:
-    #     print(east)
-    #     print(west)
-    #     print(pop)
     assert (cc > 0)
 
     mappings = list()
     num_pops = len(pop)
-    # for x in pop:
     for i in range(num_pops):
         x = pop[i]
         a = dist(x, west)
         b = dist(x, east)
         d = (a + c - b) / cc
         bisect.insort(mappings, (d, i))
-        # mappings.append((x, d))
 
-    # mappings = sorted(mappings, key=lambda i: i[1])
     mappings = np.array([pop[mappings[i][1]] for i in range(num_pops)])
 
     n = len(mappings)
-    # eastItems = np.concatenate((mappings[:int(n * 0.2)], mappings[int(n * 0.5):int(n * 0.8)]))
-    # westItems = np.concatenate((mappings[int(n * 0.2):int(n * 0.5)], mappings[int(n * 0.8):]))
     eastItems = mappings[:int(n * 0.5)]
     westItems = mappings[int(n * 0.5):]
-    # eastItems = mappings[:int(n * 0.2)] + mappings[int(n * 0.5):int(n * 0.8)]
-    # westItems = mappings[int(n * 0.2):int(n * 0.5)] + mappings[int(n * 0.8):]
 
     return west, east, eastItems, westItems
 
 
 def permute_row(seed, i):
-    # return np.random.permutation(seed)
     return np.random.RandomState(seed=np.random.randint(1e7)).permutation(seed)
 
 
