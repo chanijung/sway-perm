@@ -8,7 +8,7 @@ from Algorithms.tcp_sway import *
 from Algorithms.tcp_greedy import *
 
 from Algorithms.get_apfd import *
-from Algorithms.get_apsd import *
+from Algorithms.get_apsc import *
 
 import os
 import fileinput
@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
     for ver in original_ver_dict[dataset]:
         for suite in suites:
-            apsd = np.zeros((3, n))
+            apsc = np.zeros((3, n))
             apfd = np.zeros((3, n))
             runtime = np.zeros((3, n))
 
@@ -74,7 +74,7 @@ if __name__ == '__main__':
                 random.shuffle(res)
                 runtime[0][i] = time.time() - start_time
 
-                apsd[0][i] = get_apsd_linux(dataset, suite, ver, res)
+                apsc[0][i] = get_apsc_linux(dataset, suite, ver, res)
                 apfd[0][i] = get_apfd(fault_matrices[suite][str(int(ver) + 1)],
                                       test_dicts[suite], dataset, None, res, True)
 
@@ -84,7 +84,7 @@ if __name__ == '__main__':
                 res = tcp_greedy_linux(dataset, suite, ver)
                 runtime[1][i] = time.time() - start_time
 
-                apsd[1][i] = get_apsd_linux(dataset, suite, ver, res)
+                apsc[1][i] = get_apsc_linux(dataset, suite, ver, res)
                 apfd[1][i] = get_apfd(fault_matrices[suite][str(int(ver) + 1)],
                                       test_dicts[suite], dataset, None, res, True)
 
@@ -95,31 +95,31 @@ if __name__ == '__main__':
                 runtime[2][i] = time.time() - start_time
                 print(f'sway {time.time() - start_time} taken')
 
-                tmp_apsd, tmp_apfd = [], []
+                tmp_apsc, tmp_apfd = [], []
                 for perm in res:
-                    tmp_apsd.append(get_apsd_linux(dataset, suite, ver, perm))
+                    tmp_apsc.append(get_apsc_linux(dataset, suite, ver, perm))
                     tmp_apfd.append(
                         get_apfd(fault_matrices[suite][str(int(ver) + 1)], test_dicts[suite], dataset, None, perm,
                                  True))
-                idx = tmp_apsd.index(max(tmp_apsd))
-                apsd[2][i] = tmp_apsd[idx]
+                idx = tmp_apsc.index(max(tmp_apsc))
+                apsc[2][i] = tmp_apsc[idx]
                 apfd[2][i] = tmp_apfd[idx]
 
-            apsd_mean = np.mean(apsd, axis=1)
-            apsd_std = np.std(apsd, axis=1)
+            apsc_mean = np.mean(apsc, axis=1)
+            apsc_std = np.std(apsc, axis=1)
             apfd_mean = np.mean(apfd, axis=1)
             apfd_std = np.std(apfd, axis=1)
 
-            print("APSD mean/std, APFD mean/std")
-            print(f"random {dataset} s{suite} v{ver}: {apsd_mean[0]}/{apsd_std[0]}, {apfd_mean[0]}/{apfd_std[0]}")
-            print(f"greedy {dataset} s{suite} v{ver}: {apsd_mean[1]}/{apsd_std[1]}, {apfd_mean[1]}/{apfd_std[1]}")
-            print(f"sway {dataset} s{suite} v{ver}: {apsd_mean[2]}/{apsd_std[2]}, {apfd_mean[2]}/{apfd_std[2]}")
+            print("apsc mean/std, APFD mean/std")
+            print(f"random {dataset} s{suite} v{ver}: {apsc_mean[0]}/{apsc_std[0]}, {apfd_mean[0]}/{apfd_std[0]}")
+            print(f"greedy {dataset} s{suite} v{ver}: {apsc_mean[1]}/{apsc_std[1]}, {apfd_mean[1]}/{apfd_std[1]}")
+            print(f"sway {dataset} s{suite} v{ver}: {apsc_mean[2]}/{apsc_std[2]}, {apfd_mean[2]}/{apfd_std[2]}")
 
             # Save .csv
             # folder_name = "CSVs/CSV-(2^{})".format(args.initial)
             folder_name = "CSVs/CSV-test-(2^{})".format(args.initial)
             if not os.path.isdir(folder_name):
                 os.makedirs(folder_name)
-            np.savetxt(folder_name + "/{}_s{}_v{}_apsd.csv".format(dataset, suite, ver), apsd, delimiter=",")
+            np.savetxt(folder_name + "/{}_s{}_v{}_apsc.csv".format(dataset, suite, ver), apsc, delimiter=",")
             np.savetxt(folder_name + "/{}_s{}_v{}_apfd.csv".format(dataset, suite, ver), apfd, delimiter=",")
             np.savetxt(folder_name + "/{}_s{}_v{}_runtime.csv".format(dataset, suite, ver), runtime, delimiter=",")

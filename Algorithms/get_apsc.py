@@ -8,13 +8,13 @@ import pandas as pd
 
 
 # Assume that perm is a list of integers
-def get_apsd_linux(dataset, suite, ver, perm):
+def get_apsc_linux(dataset, suite, ver, perm):
     ts_values = []
     tc_order = 1
     uncovered_lines = []
     path = 'Datasets/linuxutils/coverage_singlefault/' + dataset + '/s' + str(suite) + '/v' + ver + ".pkl"
     df = pd.read_pickle(path)
-    apsd=0
+    apsc=0
     for i in perm:  # i is test case number
         cov = df.iloc[:, i-1]
         profile = np.array(cov!=0).astype(int)
@@ -27,6 +27,6 @@ def get_apsd_linux(dataset, suite, ver, perm):
                 uncovered_lines.remove(k)  # Will not check the cover of this line anymore
         tc_order += 1
 
-    apsd = 1 - sum(ts_values) / ((tc_order - 1) * profile.size) + 0.5 / (tc_order - 1)
+    apsc = 1 - sum(ts_values) / ((tc_order - 1) * profile.size) + 0.5 / (tc_order - 1)
 
-    return apsd
+    return apsc

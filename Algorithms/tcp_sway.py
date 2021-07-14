@@ -10,7 +10,7 @@ from __future__ import division
 import sys
 import os
 from Algorithms.sway_sampler import sway
-from Algorithms.get_apsd import *
+from Algorithms.get_apsc import *
 from multiprocessing import Pool
 import numpy as np
 from numpy import linalg as LA
@@ -86,7 +86,7 @@ def tcp_sway(dataset, suite, ver, initial, stop):
 
     # Compare function
     def comparing(part1, part2):
-        return get_apsd_linux(dataset, suite, ver, part1) > get_apsd_linux(dataset, suite, ver, part2)
+        return get_apsc_linux(dataset, suite, ver, part1) > get_apsc_linux(dataset, suite, ver, part2)
 
     length = num_tests_dict[dataset][suite]
 
