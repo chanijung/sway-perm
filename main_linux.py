@@ -109,8 +109,7 @@ if __name__ == '__main__':
         print(f"sway {dataset} s{suite} v{int(ver) + 1}: {apsc_mean[2]}/{apsc_std[2]}, {apfd_mean[2]}/{apfd_std[2]}")
 
         # Save .csv
-        # folder_name = "CSVs/CSV-(2^{})".format(args.initial)
-        folder_name = "CSVs/CSV-test-(2^{})".format(args.initial)
+        folder_name = "CSVs/CSV-(2^{})".format(args.initial)
         if not os.path.isdir(folder_name):
             os.makedirs(folder_name)
         np.savetxt(folder_name + "/{}_s{}_v{}_apsc.csv".format(dataset, suite, int(ver) + 1), apsc, delimiter=",")
