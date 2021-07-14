@@ -11,9 +11,9 @@ import pandas as pd
 def get_apsc_linux(dataset, suite, ver, perm):
     """
     Args:
-        dataset: Name of System Under Test (SUT)
+        dataset: Name of subject program
         suite: Test suite ID number
-        ver: SUT version number
+        ver: Subject program version number
         perm: Permutation of test cases
 
     Returns:

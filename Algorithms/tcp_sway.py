@@ -94,9 +94,9 @@ def permute_row(seed, i):
 def tcp_sway(dataset, suite, ver, initial, stop):
     """
     Args:
-        dataset: Name of System Under Test (SUT)
+        dataset: Name of subject program
         suite: Test suite ID number
-        ver: SUT version number
+        ver: Subject program version number
         initial: Initial population size
         stop: Stopping population size
 

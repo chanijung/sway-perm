@@ -13,9 +13,9 @@ import pandas as pd
 def fault_matrix_linux(dataset, suite, num_faults_dict):
     """
     Args:
-        dataset: Name of System Under Test (SUT)
+        dataset: Name of subject program
         suite: Test suite ID number
-        num_faults_dict: Dictionary object that contains number of faulty versions of each SUT.
+        num_faults_dict: Dictionary that contains number of faults of each program version.
 
     Returns:
         fault matrix of size num_faults x num_tests
@@ -59,7 +59,7 @@ def fault_matrix_linux(dataset, suite, num_faults_dict):
             test = l.strip()
             if test_dict.get(test) == None:
                 print(f'keyerror with {test} : {dataset} s{suite} ver{ver} ')
-            matrices[ver][test_dict[test]][fault_count] = 1     # 0 or 1 for certain pair of testcase and faulty version
+            matrices[ver][test_dict[test]][fault_count] = 1     # 0 or 1 for certain pair of testcase and fault
         fault_count += 1
 
     return matrices, test_dict
@@ -70,7 +70,7 @@ def get_apfd(matrix, test_dict, dataset, suite, perm, isLinux=False):
     Args:
         matrix: Fault matrix
         test_dict: Dict of test case name: serial number
-        dataset: Name of System Under Test (SUT)
+        dataset: Name of subject program
         suite: Test suite ID number
         isLinux: Is linux utility or not
 

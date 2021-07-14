@@ -12,9 +12,9 @@ import pandas as pd
 def tcp_greedy_linux(dataset, suite, ver):
     """
     Args:
-        dataset: Name of System Under Test (SUT)
+        dataset: Name of subject program
         suite: Test suite ID number
-        ver: SUT version number
+        ver: Subject program version number
 
     Returns:
         TCP greedy solution of test suite size
