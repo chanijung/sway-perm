@@ -42,8 +42,8 @@ def fault_matrix_linux(dataset, suite, num_faults_dict):
     dump_files.sort()
     num_faults = len(dump_files)
     matrices = {}
-    for ver in num_faults_dict[dataset][suite].keys():
-        matrix = np.zeros([num_tests, num_faults_dict[dataset][suite][ver]])
+    for ver in num_faults_dict[dataset].keys():
+        matrix = np.zeros([num_tests, num_faults_dict[dataset][ver]])
         matrices[ver] = matrix
 
     ##Fill in the matrices
