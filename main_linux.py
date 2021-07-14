@@ -23,7 +23,7 @@ if __name__ == '__main__':
     # -d DATASET -n NUMBER -init INITIAL -s STOP -min MIN_Y -max MAX_Y
     parser.add_argument("-d", "--dataset", help="Name of subject program")
     parser.add_argument("-n", "--number", help="number of repetitions", type=int, default=30) 
-    parser.add_argument("-init", "--initial", help="initial number of candidates", type=int, default=18) 
+    parser.add_argument("-init", "--initial", help="initial number of candidates", type=int, default=17) 
     parser.add_argument("-stop", "--stop", help="stop SWAY clustering when candidate number is less than this value",
                         type=int, default=100)
     parser.add_argument("-min", "--min_y", help="min value of y axis in box plot", type=float, default=0.5)
@@ -65,7 +65,6 @@ if __name__ == '__main__':
         for i in tqdm(range(n)):
 
             # # Random algorithm
-            print(f'random')
             start_time = time.time()
             res = list(range(1, num_tests_dict[dataset] + 1))
             random.shuffle(res)
@@ -76,7 +75,6 @@ if __name__ == '__main__':
                                     test_dict, dataset, None, res, True)
 
             # # Greedy algorithm
-            print("greedy")
             start_time = time.time()
             res = tcp_greedy_linux(dataset, suite, ver)
             runtime[1][i] = time.time() - start_time
@@ -86,11 +84,9 @@ if __name__ == '__main__':
                                     test_dict, dataset, None, res, True)
 
             # # # SWAY for TCP
-            print(f'sway')
             start_time = time.time()
             res, can = tcp_sway(dataset, suite, ver, init, args.stop)
             runtime[2][i] = time.time() - start_time
-            print(f'sway {time.time() - start_time} taken')
 
             tmp_apsc, tmp_apfd = [], []
             for perm in res:
