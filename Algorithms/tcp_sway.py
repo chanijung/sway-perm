@@ -109,24 +109,15 @@ def permute_row(seed, i):
     return np.random.RandomState(seed=np.random.randint(1e7)).permutation(seed)
 
 
-def tcp_sway(dataset, suite, ver, initial, stop, alg=2):
-    # num_tests_dict = {'flex':21, 'grep':193, 'gzip':211, 'sed':36}
+def tcp_sway(dataset, suite, ver, initial, stop):
     num_tests_dict = {'flex': {1: 21, 2: 525}, 'grep': {1: 193, 2: 152, 3: 140}, 'gzip': {1: 211},
                       'sed': {1: 36, 2: 360}}
 
     # Compare function
-    def comparing(part1, part2):  ##Need modification
-        if ver == '0':
-            return get_apsd(dataset, part1) > get_apsd(dataset, part2)
-        else:
-            return get_apsd_linux(dataset, suite, ver, part1) > get_apsd_linux(dataset, suite, ver, part2)
+    def comparing(part1, part2):
+        return get_apsd_linux(dataset, suite, ver, part1) > get_apsd_linux(dataset, suite, ver, part2)
 
-    if ver == '0':
-        path = 'Datasets/' + dataset + '/traces'
-        file_list = os.listdir(path)
-        length = sum(['dump' in name for name in file_list])
-    else:  # linux utils
-        length = num_tests_dict[dataset][suite]
+    length = num_tests_dict[dataset][suite]
 
     ## Build initial population in a parallel manner
     seed = np.array(range(1, length + 1))
@@ -135,20 +126,5 @@ def tcp_sway(dataset, suite, ver, initial, stop, alg=2):
     new_rows = pool.map(wrapper, range(1, initial))
     pool.close()
     candidates = np.concatenate((np.reshape(seed, (1, length)), np.array(new_rows)))
-    # candidates = []
-    # for _ in range(initial):
-    #     x = list(range(1, length + 1))
-    #     while x in candidates:  # avoid any repetitions
-    #         random.shuffle(x)
-    #     candidates.append(x)
 
-    ## Binary embedding
-    if alg == 1:
-        raise ValueError("Binary embedding not yet implemented!!")
-        # emb_cand, emb_dict = embed(candidates)
-        # res = sway(emb_cand, partial(split_products, groupC=min(15, dim // 7)), comparing, alg, emb_dict)
-        # return res, candidates
-
-    ## Continuous embedding
-    elif alg == 2:
-        return sway(candidates, where, comparing, stop, alg, None), candidates
+    return sway(candidates, where, comparing, stop, None), candidates

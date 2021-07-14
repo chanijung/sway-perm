@@ -21,11 +21,9 @@ import numpy as np
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    # -d DATASET -n NUMBER -e EMBEDDING -init INITIAL -s STOP -min MIN_Y -max MAX_Y
+    # -d DATASET -n NUMBER -init INITIAL -s STOP -min MIN_Y -max MAX_Y
     parser.add_argument("-d", "--dataset", help="dataset name")
     parser.add_argument("-n", "--number", help="number of repetitions", type=int, default=30) 
-    parser.add_argument("-e", "--embedding", help="type of embedding used (1 for non-distortive, 2 for distortive)",
-                        type=int, default=2)
     parser.add_argument("-init", "--initial", help="initial number of candidates", type=int, default=18) 
     parser.add_argument("-stop", "--stop", help="stop SWAY clustering when candidate number is less than this value",
                         type=int, default=100)
@@ -94,7 +92,7 @@ if __name__ == '__main__':
                 # # # SWAY for TCP
                 print(f'sway')
                 start_time = time.time()
-                res, can = tcp_sway(dataset, suite, ver, init, args.stop, args.embedding)
+                res, can = tcp_sway(dataset, suite, ver, init, args.stop)
                 runtime[2][i] = time.time() - start_time
                 print(f'sway {time.time() - start_time} taken')
 
