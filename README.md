@@ -15,15 +15,23 @@ The paper extends [SWAY](https://ieeexplore.ieee.org/document/8249828), an effic
 
 ---
 
-## Replication
+## Reproducing results in the paper
 
-### Correlations between swap distance and different embedding distances
+### Correlations between swap(Kendall-tau) distance and different embedding distances
 <img src="https://user-images.githubusercontent.com/17661005/125710625-1d8aabc7-fe66-49e6-b652-8c45acf0d43d.png" width="350"/> <img src="https://user-images.githubusercontent.com/17661005/125710961-f1008bff-6b02-44a0-89ba-a8194cda0152.png" width="350"/>
 <!-- ![](https://user-images.githubusercontent.com/17661005/125710625-1d8aabc7-fe66-49e6-b652-8c45acf0d43d.png) ![](https://user-images.githubusercontent.com/17661005/125710961-f1008bff-6b02-44a0-89ba-a8194cda0152.png) -->
 
+This is the main (empirical) motivation for a new embedding of permutation decision space: note how the Kendall tau has no correlation with the naive embedding's Euclidean distance! Using our proposed embedding, one can retain an almost perfect correlation with the Kendall tau.
+
+To reproduce results in Fig. 1, run the following command *in "init schemes" folder*:
+
+```console
+python reproduce-fig1.py
+```
+
 <br/>
 
-### Comparison of random, greedy, and SWAY
+### Comparison of random, greedy, and SWAY algorithms for TCP on Linux programs
 <img src="https://user-images.githubusercontent.com/46154572/125720279-0e6b16de-3e21-48b8-996e-34313bcfa374.png" width="350"/> <img src="https://user-images.githubusercontent.com/46154572/125720298-d4b95c46-febb-446f-88cd-910c9671073c.png" width="350"/>
 <!-- ![](https://user-images.githubusercontent.com/46154572/125720279-0e6b16de-3e21-48b8-996e-34313bcfa374.png) ![](https://user-images.githubusercontent.com/46154572/125720298-d4b95c46-febb-446f-88cd-910c9671073c.png) -->
 To reproduce results in Fig.2, run the following command:
@@ -32,12 +40,11 @@ sh evaluate.sh
 ```
 <br/>
 
-### Sensitivity test of SWAY to initial sample size
+### Sensitivity of SWAY to initial population size
 <img src="https://user-images.githubusercontent.com/46154572/125720301-9a672f4e-fd36-4948-90da-436dd4a531d5.png" width="350"/> <img src="https://user-images.githubusercontent.com/46154572/125720305-bdfcdbc6-00ca-4dcd-b061-f2ad6db2d732.png" width="350"/>
 <!-- ![](https://user-images.githubusercontent.com/46154572/125720301-9a672f4e-fd36-4948-90da-436dd4a531d5.png) ![](https://user-images.githubusercontent.com/46154572/125720305-bdfcdbc6-00ca-4dcd-b061-f2ad6db2d732.png) -->
 To reproduce results in Fig.3, run the following command:
 ```console
 sh evaluate_initial.sh
 ```
-
 
