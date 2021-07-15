@@ -33,8 +33,8 @@ sh evaluate.sh
 <br/>
 
 ### Sensitivity test of SWAY to initial sample size
-To reproduce results in Fig.3, run the following command
 ![](https://user-images.githubusercontent.com/46154572/125720301-9a672f4e-fd36-4948-90da-436dd4a531d5.png =400x) ![](https://user-images.githubusercontent.com/46154572/125720305-bdfcdbc6-00ca-4dcd-b061-f2ad6db2d732.png =400x)
+To reproduce results in Fig.3, run the following command:
 ```console
 sh evaluate_initial.sh
 ```
