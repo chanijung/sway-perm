@@ -18,6 +18,7 @@ The paper extends [SWAY](https://ieeexplore.ieee.org/document/8249828), an effic
 ## Replication
 
 ### Correlations between swap distance and different embedding distances
+
 ![](https://user-images.githubusercontent.com/17661005/125710625-1d8aabc7-fe66-49e6-b652-8c45acf0d43d.png =400x) ![](https://user-images.githubusercontent.com/17661005/125710961-f1008bff-6b02-44a0-89ba-a8194cda0152.png =400x)
 
 <br/>
@@ -32,10 +33,10 @@ sh evaluate.sh
 <br/>
 
 ### Sensitivity test of SWAY to initial sample size
-To reproduce results in Fig.3, run the following command:
+To reproduce results in Fig.3, run the following command
+![](https://user-images.githubusercontent.com/46154572/125720301-9a672f4e-fd36-4948-90da-436dd4a531d5.png =400x) ![](https://user-images.githubusercontent.com/46154572/125720305-bdfcdbc6-00ca-4dcd-b061-f2ad6db2d732.png =400x)
 ```console
 sh evaluate_initial.sh
 ```
-![](https://user-images.githubusercontent.com/46154572/125720301-9a672f4e-fd36-4948-90da-436dd4a531d5.png =400x) ![](https://user-images.githubusercontent.com/46154572/125720305-bdfcdbc6-00ca-4dcd-b061-f2ad6db2d732.png =400x)
-```
-![](
+
+
