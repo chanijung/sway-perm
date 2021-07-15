@@ -14,23 +14,28 @@ This repository contains the artifact for the paper titled *Preliminary Evaluati
 The paper extends [SWAY](https://ieeexplore.ieee.org/document/8249828), an efficient sampling based baseline search heuristic, to permutative decision space. The preliminary study uses Test Case Prioritisation (TCP) problem to study the feasibility of our theoretical extension, and this repository supports the replication of the study.
 
 ---
-<!-- ## Instructions on running experiments
-This has been tested successfully on the following test suites:
-- flex
-- grep
-- gzip
-- sed -->
 
 ## Replication
 
+### Correlations between swap distance and different embedding distances
+![](https://user-images.githubusercontent.com/17661005/125710625-1d8aabc7-fe66-49e6-b652-8c45acf0d43d.png =400x) ![](https://user-images.githubusercontent.com/17661005/125710961-f1008bff-6b02-44a0-89ba-a8194cda0152.png =400x)
+
+<br/>
+
 ### Comparison of random, greedy, and SWAY
+
+![](https://user-images.githubusercontent.com/46154572/125720279-0e6b16de-3e21-48b8-996e-34313bcfa374.png =400x) ![](https://user-images.githubusercontent.com/46154572/125720298-d4b95c46-febb-446f-88cd-910c9671073c.png =400x)
 To reproduce results in Fig.2, run the following command:
 ```console
 sh evaluate.sh
 ```
+<br/>
 
 ### Sensitivity test of SWAY to initial sample size
 To reproduce results in Fig.3, run the following command:
 ```console
 sh evaluate_initial.sh
 ```
+![](https://user-images.githubusercontent.com/46154572/125720301-9a672f4e-fd36-4948-90da-436dd4a531d5.png =400x) ![](https://user-images.githubusercontent.com/46154572/125720305-bdfcdbc6-00ca-4dcd-b061-f2ad6db2d732.png =400x)
+```
+![](
