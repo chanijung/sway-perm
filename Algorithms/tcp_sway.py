@@ -20,17 +20,18 @@ import time
 
 
 def rank_vector(pi):
-    n = len(pi)
-    result = np.zeros(n)
+    # n = len(pi)
+    # result = np.zeros(n)
 
-    for i in range(n):
-        result[i] = np.where(pi == i + 1)[0][0]
-    return result
+    # for i in range(n):
+    #     result[i] = np.where(pi == i + 1)[0][0]
+    # return result
+    return np.argsort(pi)
 
 
 def dist(ind1, ind2):
-    ind1 = rank_vector(ind1)  # To calculate swap distance
-    ind2 = rank_vector(ind2)
+    ind1 = np.argsort(ind1)  # To calculate swap distance
+    ind2 = np.argsort(ind2)
     return LA.norm(ind1 - ind2)
 
 
@@ -106,9 +107,11 @@ def tcp_sway(dataset, suite, ver, initial, stop):
     num_tests_dict = {'flex': {1: 21, 2: 525}, 'grep': {1: 193, 2: 152, 3: 140}, 'gzip': {1: 211},
                       'sed': {1: 36, 2: 360}}
 
+    apsc_linux = APSCLinux(dataset, suite, ver)
+
     # Compare function
     def comparing(part1, part2):
-        return get_apsc_linux(dataset, suite, ver, part1) > get_apsc_linux(dataset, suite, ver, part2)
+        return apsc_linux.get_apsc_linux(part1) > apsc_linux.get_apsc_linux(part2)
 
     length = num_tests_dict[dataset][suite]
 

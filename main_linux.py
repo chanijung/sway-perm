@@ -61,6 +61,8 @@ if __name__ == '__main__':
         apfd = np.zeros((3, n))
         runtime = np.zeros((3, n))
 
+        apsc_linux = APSCLinux(dataset, suite, ver)
+
         # For each algorithm, solve TCP using APSC of previous version of the System Under Test (SUT).
         for i in tqdm(range(n)):
 
@@ -69,8 +71,9 @@ if __name__ == '__main__':
             res = list(range(1, num_tests_dict[dataset] + 1))
             random.shuffle(res)
             runtime[0][i] = time.time() - start_time
+            print(f"Random Runtime: {runtime[0][i]}")
 
-            apsc[0][i] = get_apsc_linux(dataset, suite, ver, res)
+            apsc[0][i] = apsc_linux.get_apsc_linux(res)
             apfd[0][i] = get_apfd(matrices[str(int(ver) + 1)],
                                     test_dict, dataset, None, res, True)
 
@@ -78,19 +81,23 @@ if __name__ == '__main__':
             start_time = time.time()
             res = tcp_greedy_linux(dataset, suite, ver)
             runtime[1][i] = time.time() - start_time
+            print(f"Greedy Runtime: {runtime[1][i]}")
 
-            apsc[1][i] = get_apsc_linux(dataset, suite, ver, res)
+            
+            apsc[1][i] = apsc_linux.get_apsc_linux(res)
             apfd[1][i] = get_apfd(matrices[str(int(ver) + 1)],
                                     test_dict, dataset, None, res, True)
+            
 
             # # # SWAY for TCP
             start_time = time.time()
             res, can = tcp_sway(dataset, suite, ver, init, args.stop)
             runtime[2][i] = time.time() - start_time
+            print(f"Sway Runtime: {runtime[2][i]}")
 
             tmp_apsc, tmp_apfd = [], []
             for perm in res:
-                tmp_apsc.append(get_apsc_linux(dataset, suite, ver, perm))
+                tmp_apsc.append(apsc_linux.get_apsc_linux(perm))
                 tmp_apfd.append(
                     get_apfd(matrices[str(int(ver) + 1)], test_dict, dataset, None, perm,
                                 True))
